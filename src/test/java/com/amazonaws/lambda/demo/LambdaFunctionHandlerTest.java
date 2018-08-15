@@ -13,7 +13,6 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.junit.Assert;
 import org.junit.Before;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -33,7 +32,6 @@ import com.amazonaws.services.s3.model.S3ObjectInputStream;
 /**
  * A simple test harness for locally invoking your Lambda function handler.
  */
-@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class LambdaFunctionHandlerTest {
 

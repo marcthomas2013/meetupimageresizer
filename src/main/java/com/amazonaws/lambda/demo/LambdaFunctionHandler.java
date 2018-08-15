@@ -23,11 +23,13 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, String> {
 
 	private static final int IMG_WIDTH = 100;
 	private static final int IMG_HEIGHT = 100;
+	private static final String RESIZED_BUCKET_NAME = "meetupdestimagebucket";
 
-	private AmazonS3 s3 = AmazonS3ClientBuilder.standard().build();
-	private String resizedBucketName = "meetupdestimagebucket";
-    
-    public LambdaFunctionHandler() {}
+	private final AmazonS3 s3;
+
+    public LambdaFunctionHandler() {
+    	 s3 = AmazonS3ClientBuilder.standard().build();
+	}
 
     // Test purpose only.
     LambdaFunctionHandler(AmazonS3 s3) {
@@ -71,7 +73,7 @@ public class LambdaFunctionHandler implements RequestHandler<S3Event, String> {
 			ImageIO.write(resizeImageJpg, "jpg", resizedImageFile); 
 			
 			// Push the image to the other bucket
-			s3.putObject(new PutObjectRequest(resizedBucketName , response.getKey(), resizedImageFile));
+			s3.putObject(new PutObjectRequest(RESIZED_BUCKET_NAME, response.getKey(), resizedImageFile));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
